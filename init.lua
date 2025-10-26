@@ -68,13 +68,13 @@ vim.o.softtabstop = 2
 --- General Keymaps
 
 -- Clear search highlighting
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Show diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { silent = true, desc = 'Show diagnostic [Q]uickfix list' })
 
 -- Save on Ctrl-s
-vim.keymap.set('n', '<C-s>', ':w<CR>', { desc = 'Save file' })
+vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', { silent = true, desc = 'Save file' })
 
 --- Plugin management
 
@@ -83,9 +83,7 @@ vim.pack.add {
   { src = 'https://github.com/comfysage/lynn.nvim', name = 'lynn' },
 }
 
-vim.pack.add {
-  { src = 'https://github.com/nvim-neo-tree/neo-tree.nvim', name = 'neo-tree' },
-}
+require('filetypes').setup()
 
 local utils = require 'utils'
 utils.timer.start_background_checks()

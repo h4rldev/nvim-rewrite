@@ -6,10 +6,12 @@ local function week_passed(marker_path)
     return true
   end
 
-  local now = vim.loop.hrtime()
-  local week_ns = 7 * 24 * 60 * 60 * 1000000000 -- 7 days in nanoseconds
+  local now = os.time()
+  local week = 7 * 24 * 60 * 60
 
-  return now - stat.birthtime.nsec > week_ns
+  local modified_time = stat.mtime.sec + stat.mtime.nsec / 1e9
+
+  return now - modified_time >= week
 end
 
 local function create_marker(marker_path)
@@ -19,8 +21,13 @@ local function create_marker(marker_path)
     vim.loop.fs_mkdir(dir, -1)
   end
 
+  if vim.fn.filereadable(marker_path) == 1 then
+    vim.fn.delete(marker_path)
+  end
+
   local fd = vim.loop.fs_open(marker_path, 'w', 420)
   if fd then
+    vim.loop.fs_write(fd, '1', nil)
     vim.loop.fs_close(fd)
   end
 end
@@ -35,6 +42,7 @@ function M.timer.background_checker()
 
   if week_passed(marker_path) then
     create_marker(marker_path)
+    vim.notify('A week has passed, updating plugins...', vim.log.levels.INFO)
     vim.pack.update(nil, { force = true })
     vim.schedule(function()
       vim.notify('Plugins updated silently in background!', vim.log.levels.INFO)

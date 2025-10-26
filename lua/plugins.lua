@@ -48,4 +48,10 @@ return {
   { url = 'stevearc/conform.nvim', name = 'conform' },
   { url = 'zbirenbaum/nvterm', name = 'nvterm' },
   { url = 'windwp/nvim-autopairs', name = 'autopairs', event = 'InsertEnter' },
+  { url = 'OXY2DEV/markview.nvim', name = 'markview' },
+  { url = 'lukas-reineke/indent-blankline.nvim', name = 'indent-blankline' },
+  { url = 'mfussenegger/nvim-lint', name = 'lint', event = { 'BufReadPre', 'BufNewFile' } },
+  { url = 'mrcjkb/rustaceanvim', version = 'v6.9.2' },
+  { url = 'wakatime/vim-wakatime', name = 'wakatime' },
+  { url = 'kdheepak/lazygit.nvim', name = 'lazygit' },
 }

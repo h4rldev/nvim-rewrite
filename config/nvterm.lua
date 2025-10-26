@@ -28,14 +28,45 @@ nvterm.setup {
   },
 }
 
-vim.keymap.set('n', '<A-v>', function()
-  nvterm_terminal.toggle 'vertical'
-end, { silent = true, noremap = true, desc = 'Toggle vertical terminal' })
+local toggle_modes = { 'n', 't' }
+local mappings = {
+  {
+    toggle_modes,
+    '<A-h>',
+    function()
+      nvterm_terminal.toggle 'horizontal'
+    end,
+    { silent = true, noremap = true, desc = 'Toggle horizontal terminal' },
+  },
+  {
+    toggle_modes,
+    '<A-v>',
+    function()
+      nvterm_terminal.toggle 'vertical'
+    end,
+    { silent = true, noremap = true, desc = 'Toggle vertical terminal' },
+  },
+  {
+    toggle_modes,
+    '<A-i>',
+    function()
+      nvterm_terminal.toggle 'float'
+    end,
+    { silent = true, noremap = true, desc = 'Toggle floating terminal' },
+  },
+}
 
-vim.keymap.set('n', '<A-h>', function()
-  nvterm_terminal.toggle 'horizontal'
-end, { silent = true, noremap = true, desc = 'Toggle horizontal terminal' })
+if vim.fn.executable 'lazygit' == 1 then
+  mappings[#mappings + 1] = {
+    toggle_modes,
+    '<A-s>',
+    function()
+      nvterm_terminal.send('lazygit', 'float')
+    end,
+    { silent = true, noremap = true, desc = 'Open Lazygit' },
+  }
+end
 
-vim.keymap.set('n', '<A-i>', function()
-  nvterm_terminal.toggle 'float'
-end, { silent = true, noremap = true, desc = 'Toggle float terminal' })
+for _, mapping in ipairs(mappings) do
+  vim.keymap.set(mapping[1], mapping[2], mapping[3], mapping[4])
+end

@@ -44,11 +44,11 @@ require('blink.cmp').setup {
     default = { 'lsp', 'path', 'snippets', 'lazydev', 'supermaven' },
     providers = {
       lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
-			supermaven = {
-          name = 'supermaven',
-          module = "blink-cmp-supermaven",
-          async = true
-        },
+      supermaven = {
+        name = 'supermaven',
+        module = 'blink-cmp-supermaven',
+        async = true,
+      },
     },
   },
 

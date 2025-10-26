@@ -6,9 +6,9 @@ pkgs.mkShell {
     zsh
     stylua
     lua-language-server
+    luajit
+    luajitPackages.luacheck
+
+    cbfmt
   ];
-  shellHook = ''
-  '';
-  # Additional configuration (if needed)
-  RUST_BACKTRACE = 1;
 }
