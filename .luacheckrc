@@ -63,4 +63,5 @@ globals = {
   'tostring',
   'ipairs',
   'pairs',
+  'Snacks',
 }

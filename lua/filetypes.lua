@@ -13,6 +13,7 @@ end
 function M.setup()
   add_filetype({ '**/.github/workflows/*.yml', '**/.github/workflows/*.yaml' }, 'yaml.ghaction')
   add_filetype({ '**/*.mdx' }, 'markdownx')
+  add_filetype({ '**/docker-compose*.yml', '**/docker-compose*.yaml' }, 'yaml.docker-compose')
 end
 
 return M

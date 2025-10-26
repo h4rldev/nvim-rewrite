@@ -49,6 +49,7 @@ local linters = {
   make = { 'checkmake' },
   c = { 'clang-tidy' },
   cpp = { 'clang-tidy' },
+  dockerfile = { 'hadolint' },
 }
 
 local global_linter_list = {
