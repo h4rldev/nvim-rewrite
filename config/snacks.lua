@@ -126,6 +126,25 @@ snacks_setup.setup {
   lazygit = {
     enabled = true,
   },
+  scope = {
+    enabled = true,
+  },
+  scroll = {
+    enabled = true,
+  },
+  terminal = {
+    enabled = true,
+  },
+  styles = {
+    float = {
+      border = true,
+      position = 'float',
+      backdrop = 90,
+      height = 0.4,
+      width = 0.4,
+      zindex = 50,
+    },
+  },
 }
 
 _G.Snacks = snacks_setup
@@ -141,3 +160,31 @@ end, { desc = 'Git Repository [o]pen' })
 vim.keymap.set('n', '<leader>lg', function()
   Snacks.lazygit()
 end, { desc = 'Open [l]azy[g]it' })
+
+vim.keymap.set('n', '<leader>nh', function()
+  Snacks.notifier.show_history()
+end, { desc = 'Open [n]otifier [h]istory' })
+
+vim.keymap.set({ 'n', 'i' }, '<A-i>', function()
+  Snacks.terminal.toggle(nil, {
+    count = 1,
+    interactive = false,
+    win = { style = 'float', size = { width = 0.3, height = 0.3 } },
+  })
+end, { desc = 'Toggle Float Terminal' })
+
+vim.keymap.set({ 'n', 'i' }, '<A-v>', function()
+  Snacks.terminal.toggle(nil, {
+    count = 2,
+    interactive = false,
+    win = { position = 'right', size = { width = 0.3 }, relative = 'editor' },
+  })
+end, { desc = 'Toggle Vertical Terminal' })
+
+vim.keymap.set({ 'n', 'i' }, '<A-h>', function()
+  Snacks.terminal.toggle(nil, {
+    count = 3,
+    interactive = false,
+    win = { position = 'bottom', size = { height = 0.3 }, relative = 'editor' },
+  })
+end, { desc = 'Toggle Horizontal Terminal' })
